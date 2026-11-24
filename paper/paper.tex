@@ -1,0 +1,162 @@
+% ================================================================
+% APS / REVTeX 4.2 RESEARCH PAPER TEMPLATE
+% Based on the supplied two-column APS paper structure.
+% Replace bracketed prompts with your own writing and results.
+% Delete instructional comments before submitting.
+% ================================================================
+\documentclass[
+ reprint,
+ amsmath,amssymb,
+ aps,
+]{revtex4-2}
+
+\usepackage{graphicx} % Figures / external images
+\usepackage{dcolumn}  % Decimal-aligned table columns
+\usepackage{tikz}     % Optional diagrams
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{comment}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{bm}
+
+\begin{document}
+
+\title{[Concise paper title: system studied, key variable, or principal finding]}
+\author{[Author 1, Author 2, Author 3]}
+\affiliation{[Department, institution, city, postcode, country]}
+\date{\today}
+
+\begin{abstract}
+% Write this last, ideally as one self-contained paragraph.
+% Include: (1) research context / problem; (2) precise aim;
+% (3) experimental or computational approach; (4) main quantitative
+% result, with uncertainty where appropriate; (5) key conclusion.
+% Avoid unexplained abbreviations, lengthy background and citations.
+[Briefly state the question, what you did, the principal numerical
+finding, and what the finding means.]
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+
+% Paragraph 1: motivate the physical phenomenon and its relevance.
+[Introduce the physical problem and explain why it matters.]
+
+% Paragraph 2: provide only the background needed to understand your
+% investigation. Define the model, physical quantities and assumptions.
+% Cite suitable primary literature or review articles, e.g.:
+% \cite{example_article} (replace this example key with a real source).
+[Summarise the relevant model, prior research and essential context.]
+
+% Paragraph 3: derive / present the theoretical prediction being tested.
+% Define EVERY symbol, assumptions and expected dependence.
+[Explain the theory underlying the expected trend, and identify the
+prediction against which you will compare your data.]
+
+\begin{equation}
+\label{eq:theory}
+ y = A x^{\alpha},
+\end{equation}
+% Replace the illustrative equation with the theory for your system.
+% Explain the meanings of y, x, A and alpha, or delete the example.
+
+% Final paragraph: state the gap, research question, hypotheses and
+% what the paper will test, rather than just listing techniques.
+[State the specific research question and the quantitative tests used
+to answer it.]
+
+\section{Methodology}
+\label{sec:methodology}
+
+% Describe the experimental apparatus OR computational model.
+% State parameters, units, boundary / initial conditions, sampling
+% methods, controls, number of trials and how reproducibility is ensured.
+[Describe the setup and procedure in enough detail to reproduce it.]
+
+% Explain observable definitions and criteria used to classify outcomes.
+% Distinguish operational definitions from ideal theoretical quantities.
+[Define the quantities measured and the rules used to classify or
+extract observations.]
+
+% Describe data processing / parameter estimation / fitting and how
+% uncertainties were estimated and propagated. Mention any relevant
+% independence, convergence or finite-size checks.
+[Describe the analysis workflow and statistical treatment.]
+
+% OPTIONAL SCHEMATIC: replace the placeholder with a real diagram,
+% or remove this figure entirely. A real image could instead use:
+% \includegraphics[width=\columnwidth]{figures/setup.pdf}
+\begin{figure}[htbp]
+    \centering
+    \fbox{\parbox[c][3cm][c]{0.88\columnwidth}{\centering
+    [Insert experimental schematic, simulation geometry, or workflow]}}
+    \caption{[Describe what is shown; define symbols and explain
+    the relevant physical or computational setup.]}
+    \label{fig:setup}
+\end{figure}
+
+\section{Results \& Discussion}
+\label{sec:results}
+
+% Present important results in a logical sequence, usually with the
+% primary figure/table first. Report values with units and uncertainty.
+% Focus prose on what the data show, not on restating every plotted point.
+[Present the main measured trend and its estimated uncertainty.]
+
+% REPLACE this example with a real data plot. Keep figure references
+% in the prose, e.g. Fig.~\ref{fig:main_result}.
+\begin{figure}[htbp]
+    \centering
+    \fbox{\parbox[c][3.4cm][c]{0.88\columnwidth}{\centering
+    [Insert main result plot with axes, units, error bars and legend]}}
+    \caption{[Describe the plotted quantities, conditions, and error
+    bars. Define abbreviations so the plot can stand alone.]}
+    \label{fig:main_result}
+\end{figure}
+
+% Example table layout. Replace with data, or delete if unnecessary.
+\begin{table}[htbp]
+\caption{[Comparison of fitted parameters, conditions or key results;
+state uncertainty conventions and units.]}
+\label{tab:results}
+\begin{ruledtabular}
+\begin{tabular}{lcc}
+Condition & Measured quantity & Prediction \\
+\hline
+{[Case A]} & [value $\pm$ uncertainty] & [value] \\
+{[Case B]} & [value $\pm$ uncertainty] & [value] \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+% Compare directly against the prediction given in the Introduction.
+% Where possible, quantify agreement/disagreement: fitted exponents,
+% residuals, confidence intervals, goodness-of-fit or other apt tests.
+[Quantify agreement with theory, including numerical differences and
+whether those differences are resolved by the uncertainty.]
+
+% Interpret the physical mechanism. Compare to appropriate literature.
+% Distinguish credible systematic limitations from speculative issues.
+% Discuss refinements only when they meaningfully explain observations.
+[Interpret the results physically, compare with published work and
+discuss substantive limitations or possible model corrections.]
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Answer the question from the end of the Introduction directly.
+% State the principal quantitative result, whether the predicted
+% relation was supported, and its physical interpretation.
+% Mention the most important limitation / implication if warranted.
+% Do NOT introduce new evidence, broad unrelated applications,
+% extensive literature review or unsupported claims.
+[In a short paragraph, answer the research question, give the main
+numerical finding with uncertainty, state the strength of agreement
+with theory, and identify its principal implication.]
+
+% Keep bibliography.bib beside this file. Replace its example records
+% with real sources and cite their BibTeX keys using \cite{key}.
+\bibliography{bibliography}
+
+\end{document}
