@@ -15,3 +15,12 @@
 /paper/paper.pdf
 /paper/.local/
 __pycache__/
+
+# Local Google Cloud configuration and credentials
+.gcloud/
+gcloud/
+application_default_credentials.json
+client_secret*.json
+.env
+.env.*
+!.env.example

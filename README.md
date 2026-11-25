@@ -4,8 +4,7 @@ Turn your notes, results and figures into a physics paper with Codex. The includ
 
 1. Clone the repository or extract the starter ZIP, then open the project root in Codex.
 2. Fill in [the project brief](inputs/brief.md). Add your notes, results, analysis code, figures, sources and any assignment brief to `inputs/`. Organise them however you like.
-3. Tell Codex: `Use $physics-paper-orchestra to read my project inputs and prepare the plan for my approval. Use the specialist agents if available.`
-4. Approve the scientific plan before drafting. Review the complete first draft jointly with any collaborators and agree on scoped revisions. After the final audit, explicitly approve the compiled PDF identified by its SHA-256. A changed PDF needs fresh approval. Codex resumes from the decisions in `paper/review.md`.
+3. Start with the checkpoint 1 prompt below. The skill handles the specialist work, build and optional external review between your decisions.
 
 | Location | Contents |
 | --- | --- |
@@ -17,6 +16,24 @@ Turn your notes, results and figures into a physics paper with Codex. The includ
 | `paper/` | `paper.tex`, `bibliography.bib`, manuscript figures, `plan.md`, `review.md` and the compiled `paper.pdf` |
 
 The current assignment’s requirements take precedence for length, format, assessment and permitted AI assistance. Use the bundled [Warwick third-year laboratory report rubric](guidance/warwick-marking-sheet.pdf) where applicable and the APS guidance for style. For an actual journal submission, check the target journal's current instructions.
+
+## Prompts and approval checkpoints
+
+Use these in Codex in VS Code from the repository root. Replace bracketed text with your own decisions. In a continuous session, you can use plain language after the first prompt.
+
+The [stored prompt bank](.agents/skills/physics-paper-orchestra/references/prompts.md) includes the author prompts and the assignments Codex gives each specialist. Put past marker or supervisor feedback under `inputs/` and link it in the brief. Workers use the active rubric, relevant feedback and applicable APS guidance to rank evidence-backed uses for remaining pages.
+
+| When | What Codex brings you | What to say |
+| --- | --- | --- |
+| Start checkpoint 1 | An evidence map, section and page budget, figure plan and Google Deep Review setting in `paper/plan.md` | `Use $physics-paper-orchestra. Read inputs/brief.md and my evidence, prepare the paper plan, and stop for my approval.` |
+| Approve the plan | The current plan and any open decisions | `I approve the current plan. Build the complete draft and stop for joint review.` |
+| Agree on scope at checkpoint 2 | The inspected draft PDF, reviewer findings, edits already applied and issues for discussion | `I approve proceeding with these revisions [list agreed changes]. Apply them, verify the paper and bring me the final PDF for approval.` |
+| Review proposed Google edits, if any | Findings checked against the paper, analysis and sources | `Apply [accepted changes]. Record my decisions, rebuild and show me the resulting PDF.` |
+| Approve checkpoint 3 | The inspected final PDF, change summary, remaining limitations and SHA-256 | `I approve paper/paper.pdf with SHA-256 [hash] as the final version.` |
+
+To return in a new session, say `Use $physics-paper-orchestra. Read paper/plan.md and paper/review.md and resume from the last approved checkpoint.` If Google quota was exhausted, say `Resume the pending Deep Review and check free quota again.` or `Finish checkpoint 3 with internal verification only and show me the PDF for approval.`
+
+For example, a pendulum report with an eight-page main-text limit might budget space for the small-angle model, measurement method, plots and uncertainty analysis. After reading the draft, you might agree to add the fitted intercept and explain how its uncertainty affects the interpretation. Codex records that scope, checks the revision against the fit and confirms the counted page length from the compiled PDF. At checkpoint 3, it checks for a free external review if enabled and then brings you the exact PDF to approve.
 
 ## Build the PDF
 
@@ -35,9 +52,9 @@ The checkpoint workflow was adapted from the [Ising reference project](https://g
 
 ## Optional Google Deep Review at checkpoint 3
 
-From the local Codex session in VS Code, tell Codex for the current paper:
+Google Deep Review is **Yes** by default in `inputs/brief.md`. The checkpoint 1 plan states that Google will receive the complete near-final PDF if a free slot is available and the applicable rules allow external AI review. Approving that plan confirms the setting for the paper. To skip it, set the brief to **No** or tell Codex directly:
 
-> Use $physics-paper-orchestra and enable one free Google Deep Review for this paper at checkpoint 3. Record my opt-in in paper/plan.md or paper/review.md.
+> Skip Google Deep Review for this paper and record my decision.
 
 Once the internal audit, build and PDF inspection are complete, Codex runs this from the repository root and uses the same command to resume a pending review.
 
@@ -57,7 +74,7 @@ gcloud auth application-default login --scopes=https://www.googleapis.com/auth/c
 gcloud auth application-default set-quota-project YOUR_PROJECT_ID
 ```
 
-The integration uses Google's rolling free review allowance through user ADC and checks `GET /v1/userQuota` before uploading the full PDF. The request has no Gemini API key or paid fallback. At zero quota, Codex records Google's next available time when supplied and asks whether to wait or finish with internal verification. A later retry checks quota again. [Google quotas and limits](https://developers.google.com/deep-review/docs/rate-limits)
+The integration uses Google's rolling free review allowance through user ADC. It requires a confirmed free slot before uploading the full PDF and checks quota again before creating the review. The create request uses a fixed payload with no Gemini API key or paid fallback. At zero quota, Codex records Google's next available time when supplied and asks whether to wait or finish with internal verification. A later retry checks quota again. These safeguards apply to this Deep Review integration. Billing and other services on the Cloud project are managed separately. [Google quotas and limits](https://developers.google.com/deep-review/docs/rate-limits)
 
 Use the same Google user when resuming. A lost review submission response is reconciled against the reviews already listed for the uploaded document. If Google still shows no matching review, the run stays pending to avoid duplicate quota use. If the upload response itself is lost, the command pauses so the remote document can be reconciled before proceeding. A rebuild leaves the review tied to its original PDF. Keep the local state to preserve that association across sessions.
 

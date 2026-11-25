@@ -65,6 +65,21 @@ class DeepReviewTests(unittest.TestCase):
         deep_review.run(factory)
         factory.assert_not_called()
 
+    def test_last_slot_disappears_before_creation(self):
+        unavailable = {"remainingReviewCount": 0}
+        request = self.run_with([FREE, {"name": DOCUMENT}, unavailable])
+        self.assertEqual(request.call_args_list, [
+            call("GET", QUOTA_URL),
+            call("POST", UPLOAD_URL, PDF, "application/pdf"),
+            call("GET", QUOTA_URL),
+        ])
+        retry = self.run_with([unavailable])
+        retry.assert_called_once_with("GET", QUOTA_URL)
+
+    def test_unconfirmed_quota_blocks_upload(self):
+        request = self.run_with([{"remainingReviewCount": "1"}])
+        request.assert_called_once_with("GET", QUOTA_URL)
+
     def test_resume_saved_operation(self):
         self.run_with([FREE, {"name": DOCUMENT}, FREE, {"name": OPERATION}, {"done": False}])
         request = self.run_with([{"done": True, "response": {"name": REVIEW}}, RESULT])
