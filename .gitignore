@@ -8,3 +8,10 @@
 /paper/*.out
 /paper/*.synctex.gz
 /paper/paperNotes.bib
+
+# Local manuscript records and artifacts
+/paper/plan.md
+/paper/review.md
+/paper/paper.pdf
+/paper/.local/
+__pycache__/
