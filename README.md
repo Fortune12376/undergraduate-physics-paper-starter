@@ -9,6 +9,7 @@ Turn your notes, results and figures into a physics paper with Codex. The includ
 | Location | Contents |
 | --- | --- |
 | `AGENTS.md` | Gives Codex the project entry point |
+| [Scientific writing and review](guidance/scientific-writing.md) | Shared guidance for experimental, theoretical and computational reports |
 | [Physics PaperOrchestra](.agents/skills/physics-paper-orchestra/SKILL.md) | Named skill with the full workflow and approval rules |
 | [`.codex/agents/`](.codex/agents/) | `outline`, `literature`, `figures`, `writer` and `reviewer` specialists |
 | `inputs/` | Your brief, notes and evidence |

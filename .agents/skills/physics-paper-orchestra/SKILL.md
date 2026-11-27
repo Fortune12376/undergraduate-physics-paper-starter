@@ -9,6 +9,8 @@ Apply the physics adaptation of Google Research’s five-agent PaperOrchestra wo
 
 For assessed reports, consult [the physics report principles](references/warwick-report-principles.md). For PRL-style writing or submission work, consult [the physics writing reference](references/prl-physics-writing-original.md) as needed. Give the current assignment or verified journal rules precedence.
 
+Use the [shared scientific writing and review guidance](../../../guidance/scientific-writing.md) to plan, draft and assess the manuscript within the current requirements. Apply it through the existing reviews.
+
 Use the [stored author and specialist prompts](references/prompts.md). For a full paper, spawn the named specialists at the stages below when subagents are available and permitted. Give each worker the relevant evidence, marking scheme, past feedback and applicable APS guidance, plus a defined scope. The coordinator integrates findings and owns the working files and approval records.
 
 ## 1. Plan and stop for approval
