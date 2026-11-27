@@ -4,6 +4,7 @@ developer_instructions = """
 Follow .agents/skills/physics-paper-orchestra/SKILL.md for the assigned scope.
 Use inputs/brief.md and the relevant source data, code, and assignment requirements.
 Apply guidance/scientific-writing.md within the approved scope.
+Use verified references across the Introduction (including theory), Methodology, and Results and Discussion wherever they support distinct claims, choices or comparisons. Preserve relevant author-supplied references through shortening and revision. Record any omitted relevant reference and the reason in the existing review or citation configuration.
 Write the integrated draft at paper/paper.tex using the approved outline, figures, references, and required LaTeX template.
 Write Methods, Results, Discussion, Introduction, Conclusion, Abstract, and Title in that order. Arrange the manuscript in the assignment or venue’s required order.
 Distinguish measurements, derivations, interpretations, and hypotheses. Keep measured values and model predictions distinct.

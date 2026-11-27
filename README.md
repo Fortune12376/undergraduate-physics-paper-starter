@@ -84,3 +84,29 @@ Use the same Google user when resuming. A lost review submission response is rec
 Keep `paper/paper.tex` and `paper/paper.pdf` as the working files. Use concise chronological entries in `paper/plan.md` and `paper/review.md` to record the initial plan and feedback, first complete draft version, initial findings and applied edits, checkpoint 2 agreement and actual changes, combined verification, Google review and its disposition when used, and final approved PDF hash. Put file snapshots in `paper/.local/`. The two records, working PDF and local snapshot directory are Git-ignored by default. The Google step saves the full JSON response, including the report and anchored comments, and links it to a local copy of the reviewed PDF by SHA-256. Codex presents checked findings and proposed edits for author agreement, then stops for explicit final approval of the resulting PDF.
 
 Run the offline integration tests with `python -m unittest discover -s tests`.
+
+## Citation coverage
+
+Use a manuscript-wide average of at least 3 unique publications per scientific page. Aim for 5?8 and cite more where useful. Allocate sources by scientific contribution. A four-page manuscript requires 12 publications at minimum and targets 20?32.
+
+At draft and final review, count pages in the current compiled PDF. Count a mixed page once if it contains any scientific content, including an abstract, figure or table. Exclude title-only, bibliography-only and appendix-only pages. Then run from the repository root, replacing `N` with that count.
+
+```text
+python .agents/skills/physics-paper-orchestra/scripts/audit_manuscript.py paper/paper.tex paper/bibliography.bib --scientific-pages N
+```
+
+For automatic counting in a build with continuous Arabic numbering starting at 1, you may put `\label{citation-coverage:last-scientific-page}` at the end of the scientific content. The audit reads the label from the current AUX when the matching PDF exists. Verify against the PDF if any scientific floats occur after the label or if numbering or front matter changes. The inspected count takes precedence. Without either source the audit reports INCOMPLETE (exit 2). FAIL exits 1. WARNING and PASS exit 0.
+
+The optional `paper/citation-coverage.json` stores only keys and decisions. Example fields follow. The coordinator populates them from the author list and the existing literature handoff. For a below-minimum exception, add `approved_density_exception` containing `approved_by`, `reason`, and `approval_record` pointing to explicit author approval in `paper/review.md`. A documented reference exclusion alone cannot approve a density exception.
+
+```json
+{
+  "minimum_per_page": 3,
+  "target_per_page": [5, 8],
+  "author_supplied": ["Author2021"],
+  "recommended": ["Study2023"],
+  "reference_exclusions": {"Author2021": "Studies a different physical regime"}
+}
+```
+
+The audit accepts additional BibTeX files as positional arguments. It follows ordinary LaTeX input and include commands, ignores comments and literal inactive branches, and detects aliases by DOI, PMID, ISBN or an arXiv identifier when present. Appendix citations are checked for valid keys. Only scientific citations count towards density and reference coverage. The TeX compiler remains the authority for macro-generated citations, custom conditionals and cross-references.
